@@ -10,11 +10,17 @@ python = "^3.12"
 fastapi = "^0.104.1"
 uvicorn = "^0.24.0.post1"
 pydantic-settings = "^2.1.0"
+sqlalchemy = "^2.0.23"
+alembic = "^1.12.1"
 
 
 [tool.poetry.group.tests.dependencies]
 pytest = "^7.4.3"
 httpx = "^0.25.2"
+
+
+[tool.poetry.group.tools.dependencies]
+ruff = "^0.1.6"
 
 [build-system]
 requires = ["poetry-core"]
