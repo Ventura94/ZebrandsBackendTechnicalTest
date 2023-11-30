@@ -42,7 +42,7 @@ class BaseService:
     def update(
         self, model: LogicCreationAbstractBaseModel, form_data: BaseModel
     ) -> LogicCreationAbstractBaseModel:
-        for field, value in form_data.model_dump().items():
+        for field, value in form_data.model_dump(exclude_none=True).items():
             setattr(model, field, value)
         self.session.flush()
         self.session.refresh(model)

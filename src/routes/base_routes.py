@@ -58,7 +58,7 @@ def create_router(
         instance = service_.get(uuid)
         return service_.desactivate(instance)
 
-    @router.patch("/{uuid}", response_model=schema)
+    @router.patch("/activate/{uuid}", response_model=schema)
     def reactivate(
         uuid: UUID = Path(...),
         service_: service = Depends(),
