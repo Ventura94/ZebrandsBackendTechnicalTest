@@ -5,6 +5,16 @@ on:
 jobs:
   Test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: zebrands
+          POSTGRES_PASSWORD: zebrands
+          POSTGRES_DB: zebrands
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       OS: ubuntu-latest
       PYTHON: '3.12'
@@ -15,6 +25,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: 'Run Tests'
+        env:
+          POSTGRESQL_URL: postgresql://zebrands:zebrands@localhost:5432/zebrands
         run: |
           python -m pip install --upgrade pip          
           pip install poetry pytest httpx factory-boy
