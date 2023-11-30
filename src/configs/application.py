@@ -8,7 +8,7 @@ class Application(SettingsConfig):
     DEBUG: bool = True
     PROJECT_NAME: str = "ZebrandsBackendTechnicalTest"
     VERSION: str = __version__
-    DOCS_URL: str = "docs"
+    DOCS_URL: str = "/docs"
     OPENAPI_URL: str = "/openapi.json"
 
 
