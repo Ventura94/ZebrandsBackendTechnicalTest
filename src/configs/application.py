@@ -10,6 +10,9 @@ class Application(SettingsConfig):
     VERSION: str = __version__
     DOCS_URL: str = "/docs"
     OPENAPI_URL: str = "/openapi.json"
+    SECRET_KEY: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    TOKEN_AUD: str = "https://zebrands.mx"
 
 
 @lru_cache()
