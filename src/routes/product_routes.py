@@ -2,7 +2,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, Path
 
+from src.dependencies.is_o2auth_authenticate import is_o2auth_authenticate
 from src.dependencies.o2auth import o2auth
+from src.dependencies.register_product_trace import AnonymousProductTraceBackground
 from src.forms.product_forms import ProductCreateForm, ProductUpdateForm
 from src.querys.pagination import PaginateQuery
 from src.querys.product_query import ProductQuery
@@ -24,9 +26,14 @@ def get_filtered(
 @router.get("/{uuid}", response_model=ProductSchema)
 def get_one(
     uuid: UUID = Path(...),
+    is_authenticated=Depends(is_o2auth_authenticate),
+    product_trace: AnonymousProductTraceBackground = Depends(),
     service_: ProductService = Depends(),
 ):
-    return service_.get(uuid)
+    product = service_.get(uuid)
+    if not is_authenticated:
+        product_trace.trace_product_in_background(product.uuid)
+    return product
 
 
 @router.post("", response_model=ProductSchema, dependencies=[Depends(o2auth)])

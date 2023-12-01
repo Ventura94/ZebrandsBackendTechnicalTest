@@ -12,9 +12,14 @@ oauth2_scheme = OAuth2PasswordBearer(
 )
 
 
-async def o2auth(token: str = Depends(oauth2_scheme)):
+def o2auth(token: str = Depends(oauth2_scheme)):
     try:
-        data = jwt.decode(token, get_settings().SECRET_KEY, algorithms=ALGORITHMS.HS256)
+        data = jwt.decode(
+            token,
+            get_settings().SECRET_KEY,
+            algorithms=ALGORITHMS.HS256,
+            audience=get_settings().TOKEN_AUD,
+        )
     except JWTClaimsError as exc:
         raise AuthenticationFailed(
             "If any claim is invalid in any way.",
