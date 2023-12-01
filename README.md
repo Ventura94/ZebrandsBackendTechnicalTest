@@ -91,3 +91,38 @@ The task was to build this system by implementing a REST or GraphQL API using th
 
 Open your browser and visit http://localhost:8000/docs to see the application documentation.
 
+## Design and Architecture
+
+The system will be based on a microservices architecture, which will allow for efficient horizontal scaling as the
+system grows. Each microservice will be responsible for a specific functionality and will communicate with others
+through REST or GraphQL APIs.
+
+1. **Product Service**: This service will handle all operations related to products (create, read, update, delete). It
+   will use a PostgreSQL database to store product information.
+
+2. **User Service**: This service will handle user operations, including authentication and authorization of
+   administrators. It will also handle the creation and management of administrators.
+
+3. **Notification Service**: This service will handle sending notifications to administrators when a change is made to a
+   product. It could use an email service like AWS SES or SendGrid for this.
+
+4. **Tracking Service**: This service will track the number of times an anonymous user queries each product. This
+   information will be stored in a database and used to generate reports and recommendations system.
+
+## Scalability
+
+As the system grows, we might encounter several scalability challenges. Here are some strategies we could use to address
+these challenges:
+
+1. **Horizontal Scaling**: If a specific service is experiencing high load, we can scale it horizontally by adding more
+   instances of that service. This can be done manually or using a container orchestration service like Kubernetes.
+
+2. **Load Balancing**: We can use a load balancer to distribute incoming requests among different instances of a
+   service. This will help ensure that no single instance is overloaded.
+
+3. **Caching**: We can use a cache to store the results of frequently made database queries. This can help reduce the
+   load on the database and improve system performance.
+
+4. **Message Queues**: For notifications, we can use a message queue to handle spikes in load. When a product changes,
+   the product service can put a message in the queue, and the notification service can consume these messages at its
+   own pace.
