@@ -10,7 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 from src.configs.application import get_settings
 from src.handlers.integrity_error import integrity_exception_handler
 from src.handlers.no_result_found_error import no_result_found_exception_handler
-from src.routes import product_routes
+from src.routes import product_routes, user_routes
 
 
 @asynccontextmanager
@@ -48,3 +48,4 @@ async def health_check():
 app.add_exception_handler(IntegrityError, integrity_exception_handler)
 app.add_exception_handler(NoResultFound, no_result_found_exception_handler)
 app.include_router(product_routes.router, prefix="/v1")
+app.include_router(user_routes.router, prefix="/v1")
