@@ -3,7 +3,7 @@ from uuid import uuid4
 import factory
 
 from src.models import ProductModel
-from tests.conftest import Session
+from test.conftest import Session
 
 
 class ProductDictFactory(factory.DictFactory):

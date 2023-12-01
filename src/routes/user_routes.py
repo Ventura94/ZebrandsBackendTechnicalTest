@@ -10,6 +10,6 @@ router = create_router(
     query=UserQuery,
     create_form=UserCreateForm,
     update_form=UserUpdateForm,
-    prefix="/user",
+    prefix="/users",
     tags=["User"],
 )
