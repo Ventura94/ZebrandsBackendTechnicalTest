@@ -7,7 +7,7 @@ from test.factories.user import UserAlchemyFactory, UserDictFactory
 
 def test_get_user_filters(client: Client):
     [UserAlchemyFactory() for _ in range(10)]
-    response = client.get(f"/v1/users")
+    response = client.get("/v1/users")
     assert response.status_code == 200
     assert len(response.json()) == 10
 
@@ -23,7 +23,7 @@ def test_get_user(client: Client):
 def test_create_user(client: Client):
     fake_user = UserDictFactory()
     del fake_user["uuid"]
-    response = client.post(f"/v1/users", json=fake_user)
+    response = client.post("/v1/users", json=fake_user)
     assert response.status_code == 200
     assert response.json()
     assert fake_user["name"] == response.json()["name"]

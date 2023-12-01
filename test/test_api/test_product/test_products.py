@@ -7,7 +7,7 @@ from test.factories.product import ProductAlchemyFactory, ProductDictFactory
 
 def test_get_product_filters(client: Client):
     [ProductAlchemyFactory() for _ in range(10)]
-    response = client.get(f"/v1/products")
+    response = client.get("/v1/products")
     assert response.status_code == 200
     assert len(response.json()) == 10
 
@@ -24,7 +24,7 @@ def test_create_product(client: Client):
     fake_product = ProductDictFactory()
     fake_product["price"] = float(fake_product["price"])
     del fake_product["uuid"]
-    response = client.post(f"/v1/products", json=fake_product)
+    response = client.post("/v1/products", json=fake_product)
     assert response.status_code == 200
     assert response.json()
     assert fake_product["name"] == response.json()["name"]

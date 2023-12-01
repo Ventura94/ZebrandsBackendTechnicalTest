@@ -12,4 +12,3 @@ class UserModel(LogicCreationAbstractBaseModel):
     last_name = Column(String, nullable=True)
     email = Column(String, nullable=False, unique=True, index=True)
     password = Column(String, nullable=False)
-
