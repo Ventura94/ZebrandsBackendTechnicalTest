@@ -28,6 +28,13 @@ jobs:
         env:
           POSTGRESQL_URL: postgresql://zebrands:zebrands@localhost:5432/zebrands
           SECRET_KEY: helloiamsecretkeyfortest
+          MAIL_USERNAME: arianventura94@gmail.com
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_FROM: arianventura94@gmail.com
+          MAIL_PORT: 587
+          MAIL_SERVER: smtp.gmail.com
+          MAIL_TLS: true
+          MAIL_SSL: false
         run: |
           python -m pip install --upgrade pip          
           pip install poetry pytest httpx factory-boy
