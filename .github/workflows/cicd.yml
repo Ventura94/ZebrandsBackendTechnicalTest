@@ -1,7 +1,7 @@
-name: Test
+name: CI/CD
 on:
   push:
-    branches-ignore: [ "main" ]
+    branches: [ "main" ]
 jobs:
   Test:
     runs-on: ubuntu-latest
@@ -41,3 +41,19 @@ jobs:
           poetry export -f requirements.txt --output requirements.txt --without-hashes 
           pip install -r requirements.txt
           python -m pytest
+
+  Docker:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: |
+          docker build . --file Dockerfile -t v3n2r4/zebrands_test:latest -t v3n2r4/zebrands_test:$(echo $GITHUB_SHA | head -c7)          
+          docker push v3n2r4/zebrands_test:latest
+          docker push v3n2r4/zebrands_test:$(echo $GITHUB_SHA | head -c7)
