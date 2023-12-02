@@ -12,7 +12,7 @@ class Application(SettingsConfig):
     OPENAPI_URL: str = "/openapi.json"
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
-    TOKEN_AUD: str = "https://zebrands.mx"
+    TOKEN_AUD: str = "https://zebrands.alicfornia.com"
 
 
 @lru_cache()

@@ -1,5 +1,7 @@
 # ZebrandsBackendTechnicalTest
 
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/v3n2r4)
+
 This project is a basic catalog system to manage products, built as part of a technical test for ZeBrands. Each product
 has basic information such as SKU, name, price, and brand.
 
@@ -126,3 +128,57 @@ these challenges:
 4. **Message Queues**: For notifications, we can use a message queue to handle spikes in load. When a product changes,
    the product service can put a message in the queue, and the notification service can consume these messages at its
    own pace.
+
+# Terraform Execution Guide
+
+This guide will walk you through the steps to execute Terraform, including the creation of a variables file.
+
+## Prerequisites
+
+- Terraform installed on your machine.
+- Access to the terminal or command line interface.
+- DigitalOcean account
+- Domain in DigitalOcean account
+
+## Steps
+
+1. **Create a Variables File**
+
+   Create a file with the `.tfvars` extension, for example, `variables.tfvars`. Inside this file, define your variables
+   as follows:
+
+    ```hcl
+   do_token                   = "my_digitalocean_token"
+   do_region                  = "nyc1" # This is default
+   maintainer_email           = "arianventura94@gmail.com" # This is default 
+   zebrands_postgres_password = "postgresql_password"
+   secret_key                 = "my_secret_key"
+   service_email              = "arianventura94@gmail.com" # This is default
+   mail_password              = "email_password"
+   domain                     = "domain.com"   
+    ```
+
+2. **Initialize Terraform**
+
+   Navigate to your Terraform directory and initialize Terraform by running the following command in your terminal:
+
+    ```
+    terraform init
+    ```
+
+3. **Apply Configuration**
+
+   Apply your Terraform configuration. Make sure to include your variables file using the `-var-file` option:
+
+    ```
+    terraform apply -var-file="variables.tfvars"
+    ```
+
+## Link to Production
+
+http://zebrands.alicfornia.com/docs
+
+### Contact:
+
+[![image](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:arianventura94@gmail.com)
+[![image](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/v3n2r4)
